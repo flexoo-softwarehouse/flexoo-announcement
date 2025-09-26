@@ -64,8 +64,8 @@ export function findDeveloperByNRP(nrp: string): Developer | null {
       nrp: "5025231168",
       nama: "Kevin Andreas",
       namaDepan: "Kevin",
-      posisi: "Frontend Developer",
-      divisi: "developer",
+      posisi: "Community Member",
+      divisi: "community",
     },
     "5025221155": {
       nrp: "5025221155",

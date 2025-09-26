@@ -1,18 +1,22 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
 import Providers from "@/app/providers";
+import SecurityProtection from "@/components/SecurityProtection";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+});
 
 export const metadata: Metadata = {
   title: {
-    default: "Nextjs Starter Template",
-    template: "%s | Nextjs Starter Template",
+    default: "Flexoo",
+    template: "%s | Flexoo",
   },
-  description: "Nextjs 14.2.1 + Tailwind CSS starter template",
+  description: "Flexoo 2025 - Announcement Page",
 };
 
 export default function RootLayout({
@@ -22,7 +26,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={montserrat.className}>
+        <SecurityProtection />
         <Providers>{children}</Providers>
       </body>
     </html>

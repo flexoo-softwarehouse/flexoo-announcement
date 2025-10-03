@@ -153,6 +153,12 @@ const developersData = {
       namaDepan: "Haziq",
       posisi: "Community Member",
     },
+    "5025251118": {
+      nrp: "5025251118",
+      nama: "Anang Ardhiansyah",
+      namaDepan: "Anang",
+      posisi: "Community Member",
+    },
     "5025251137": {
       nrp: "5025251137",
       nama: "Rayyan Aqsha Raditya",
@@ -778,7 +784,7 @@ const developersData = {
       posisi: "Non-Developer (Tidak Lolos)",
     },
     "5053251023": {
-      nrp: "5053251023",
+      nrp: "5025231053",
       nama: "Afrel Zharif Muflih",
       namaDepan: "Afrel",
       posisi: "Non-Developer (Tidak Lolos)",

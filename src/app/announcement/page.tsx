@@ -69,13 +69,13 @@ export default function Announcement() {
           variant="h4"
           className="font-montserrat font-extrabold max-lg:text-3xl text-blue-900 text-center leading-4"
         >
-          PENGUMUMAN <br /> SELEKSI INTERNAL
+          PENGUMUMAN <br /> OPEN RECUIRTMENT FLEXOO
         </Typography>
         <Typography
-          variant="h6"
+          variant="p"
           className="font-montserrat font-semibold text-blue-900 text-center leading-4"
         >
-          Developer Utama dan Community Flexoo
+          Silahkan masukan NRP kamu dan buka hasil seleksi Oprec Flexoo 2025
         </Typography>
       </div>
       <div className="px-6 py-4 bg-blue-900 max-lg:w-full rounded-lg w-1/2 flex flex-col flex-start gap-2 max-lg:mt-6  mt-8">

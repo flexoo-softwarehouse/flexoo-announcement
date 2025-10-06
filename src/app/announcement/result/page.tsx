@@ -3,16 +3,15 @@
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import ButtonLink from "@/components/links/ButtonLink";
-import { Developer, findDeveloperByNRP } from "@/lib/developers";
+import {
+  Developer,
+  findDeveloperByNRP,
+  getAnnouncementInfo,
+} from "@/lib/developers";
 
-// Daftar NRP yang memiliki overlap - sama dengan yang ada di developers.ts
-const overlapNRPs = [
-  "5025251100", // Yudith Hafiz Rabbani
-  "5025251115", // Rayyan Aura Rahman
-  "5025241234", // Justin Valentino
-  "5025231177", // Muhammad Baihaqi Dawanis
-  "5025241010", // Muhammad Dzaky Radithya Ryrdi
-];
+// Daftar NRP yang memiliki overlap - kosong karena tidak ada overlap lagi
+const overlapNRPs: string[] = [];
+
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -38,21 +37,45 @@ function AnnouncementContent() {
 
   const renderResult = () => {
     if (nrp) {
-      // Cek apakah ini NRP overlap tanpa suffix
+      // Cek apakah ini NRP overlap tanpa suffix (saat ini tidak ada)
       if (overlapNRPs.includes(nrp) && !nrp.includes("-")) {
         return <OverlapNRPResult nrp={nrp} />;
       }
 
       const developer = findDeveloperByNRP(nrp);
       if (developer) {
-        if (developer.divisi === "developer") {
-          return <DeveloperLolosResult developer={developer} />;
-        } else if (developer.divisi === "community") {
-          return <CommunityResult developer={developer} />;
-        } else if (developer.divisi === "nondev_lolos") {
-          return <NonDevLolosResult developer={developer} />;
-        } else if (developer.divisi === "nondev_tidaklolos") {
-          return <NonDevTidakLolosResult developer={developer} />;
+        const announcementInfo = getAnnouncementInfo(developer);
+
+        if (announcementInfo.isAccepted) {
+          if (developer.divisi === "developer") {
+            return (
+              <DeveloperLolosResult
+                developer={developer}
+                announcementInfo={announcementInfo}
+              />
+            );
+          } else if (developer.divisi === "nondev_lolos") {
+            return (
+              <NonDevLolosResult
+                developer={developer}
+                announcementInfo={announcementInfo}
+              />
+            );
+          } else if (developer.divisi === "community") {
+            return (
+              <CommunityResult
+                developer={developer}
+                announcementInfo={announcementInfo}
+              />
+            );
+          }
+        } else {
+          return (
+            <TidakLolosResult
+              developer={developer}
+              announcementInfo={announcementInfo}
+            />
+          );
         }
       } else {
         // NRP tidak ditemukan
@@ -70,7 +93,13 @@ function AnnouncementContent() {
         posisi: "Community Member",
         divisi: "community",
       };
-      return <CommunityResult developer={dummyDeveloper} />;
+      const announcementInfo = getAnnouncementInfo(dummyDeveloper);
+      return (
+        <CommunityResult
+          developer={dummyDeveloper}
+          announcementInfo={announcementInfo}
+        />
+      );
     }
 
     return <NRPTidakDitemukanResult />;
@@ -79,8 +108,14 @@ function AnnouncementContent() {
   return <>{renderResult()}</>;
 }
 
-// Komponen untuk hasil diterima di Developer Utama - Lolos Interview
-function DeveloperLolosResult({ developer }: { developer: Developer }) {
+// Komponen untuk hasil diterima di Developer - Final Result
+function DeveloperLolosResult({
+  developer,
+  announcementInfo,
+}: {
+  developer: Developer;
+  announcementInfo: ReturnType<typeof getAnnouncementInfo>;
+}) {
   return (
     <>
       <div className="mt-4">
@@ -92,37 +127,52 @@ function DeveloperLolosResult({ developer }: { developer: Developer }) {
         </Typography>
         <Typography
           variant="h4"
-          className="font-montserrat max-lg:text-2xl font-extrabold text-blue-900 text-center leading-4"
+          className="font-montserrat max-lg:text-2xl font-bold text-blue-900 text-center leading-4"
         >
-          SELAMAT KAMU LOLOS <br /> TAHAP INTERVIEW
+          SELAMAT KAMU DITERIMA!
         </Typography>
         <Typography
-          variant="p"
-          className="font-montserrat mt-2 max-lg:text-xl font-semibold text-blue-900 text-center leading-4"
+          variant="h4"
+          className="font-montserrat max-lg:text-2xl font-bold text-blue-900 text-center leading-4"
         >
-          Silahkan Cek Jadwal Interview untuk Divisi Developer!
+          SEBAGAI{" "}
+          <span className="font-extrabold underline">
+            {announcementInfo.readableRole}!
+          </span>
         </Typography>
       </div>
+
+      {/* Button untuk grup spesifik berdasarkan posisi */}
+      {announcementInfo.whatsappLink && (
+        <ButtonLink
+          href={announcementInfo.whatsappLink}
+          variant="yellow"
+          className="rounded-none mt-8 max-lg:w-full w-1/2 max-lg:mt-6 text-black font-bold bg-yellow-400 hover:bg-yellow-500"
+        >
+          Join Grup Divisi!
+        </ButtonLink>
+      )}
+
+      {/* Button untuk grup developer umum */}
       <ButtonLink
-        href="https://docs.google.com/spreadsheets/d/1HDkr8nDUv70LbV2IyyTc3m8qXr7KE7UR3HUci5MwUvI/edit?usp=sharing"
-        variant="yellow"
-        className="rounded-none mt-8 max-lg:w-full w-1/2 max-lg:mt-6 text-black font-bold bg-yellow-400 hover:bg-yellow-500"
-      >
-        Cek Jadwal Interview Dev
-      </ButtonLink>
-      <ButtonLink
-        href="https://chat.whatsapp.com/JZBvSULF8zFFYRo6NjiQtU"
+        href="https://chat.whatsapp.com/HRdrqWTGMlaBhnEdd30WiJ"
         variant="yellow"
         className="rounded-none max-lg:w-full mt-4 w-1/2 max-lg:mt-2 text-black font-bold bg-transparent border-2 border-black hover:bg-transparent hover:text-white hover:border-white"
       >
-        Yuk join grup
+        Yuk join grup Developer!
       </ButtonLink>
     </>
   );
 }
 
 // Komponen untuk hasil diterima di Community
-function CommunityResult({ developer }: { developer: Developer }) {
+function CommunityResult({
+  developer,
+  announcementInfo,
+}: {
+  developer: Developer;
+  announcementInfo: ReturnType<typeof getAnnouncementInfo>;
+}) {
   return (
     <>
       <div className="mt-4 flex flex-col items-center justify-center">
@@ -136,28 +186,93 @@ function CommunityResult({ developer }: { developer: Developer }) {
           variant="h4"
           className="font-montserrat max-lg:w-full max-lg:text-2xl font-extrabold text-blue-900 text-center leading-4"
         >
-          SELAMAT KAMU <br /> DITERIMA DI COMMUNITY FLEXOO
+          SELAMAT!
         </Typography>
         <Typography
           variant="p"
-          className="font-montserrat mt-2 w-3/4 max-lg:w-full font-semibold text-blue-900 text-center leading-4"
+          className="font-montserrat mt-2 w-3/4 max-lg:w-full font-semibold text-blue-900 text-center leading-5"
         >
-          Silahkan masuk ke grup community Flexoo!
+          {announcementInfo.message}
         </Typography>
       </div>
+
+      {announcementInfo.whatsappLink && (
+        <ButtonLink
+          href={announcementInfo.whatsappLink}
+          variant="yellow"
+          className="rounded-none max-lg:w-full mt-8 w-1/2 max-lg:mt-6 text-black font-bold bg-yellow-400 hover:bg-yellow-500"
+        >
+          Yuk join grup Community
+        </ButtonLink>
+      )}
+
       <ButtonLink
-        href="https://chat.whatsapp.com/JZBvSULF8zFFYRo6NjiQtU"
+        href="/"
         variant="yellow"
-        className="rounded-none max-lg:w-full mt-8 w-1/2 max-lg:mt-6 text-black font-bold bg-yellow-400 hover:bg-yellow-500"
+        className="rounded-none max-lg:w-full mt-4 w-1/2 max-lg:mt-2 text-black font-bold bg-transparent border-2 border-black hover:bg-transparent hover:text-white hover:border-white"
       >
-        Yuk join grup
+        Kembali ke Home
       </ButtonLink>
     </>
   );
 }
 
 // Komponen untuk hasil Non-Developer yang Lolos
-function NonDevLolosResult({ developer }: { developer: Developer }) {
+function NonDevLolosResult({
+  developer,
+  announcementInfo,
+}: {
+  developer: Developer;
+  announcementInfo: ReturnType<typeof getAnnouncementInfo>;
+}) {
+  return (
+    <>
+      <div className="mt-4">
+        <Typography
+          variant="h6"
+          className="font-montserrat font-semibold max-lg:text-xl text-blue-900 text-center leading-4"
+        >
+          Hai {developer.namaDepan} 👋
+        </Typography>
+        <Typography
+          variant="h4"
+          className="font-montserrat max-lg:text-2xl font-bold text-blue-900 text-center leading-4"
+        >
+          SELAMAT KAMU DITERIMA!
+        </Typography>
+        <Typography
+          variant="h5"
+          className="font-montserrat max-lg:text-2xl font-bold text-blue-900 text-center leading-4"
+        >
+          SEBAGAI{" "}
+          <span className="font-extrabold underline">
+            {announcementInfo.readableRole}!
+          </span>
+        </Typography>
+      </div>
+
+      {/* Button untuk grup spesifik berdasarkan posisi */}
+      {announcementInfo.whatsappLink && (
+        <ButtonLink
+          href={announcementInfo.whatsappLink}
+          variant="yellow"
+          className="rounded-none max-lg:w-full mt-8 w-1/2 max-lg:mt-6 text-black font-bold bg-yellow-400 hover:bg-yellow-500"
+        >
+          Masuk Grup Divisi!
+        </ButtonLink>
+      )}
+    </>
+  );
+}
+
+// Komponen untuk hasil yang tidak lolos (Developer maupun Non-Developer)
+function TidakLolosResult({
+  developer,
+  announcementInfo,
+}: {
+  developer: Developer;
+  announcementInfo: ReturnType<typeof getAnnouncementInfo>;
+}) {
   return (
     <>
       <div className="mt-4 flex flex-col items-center justify-center">
@@ -171,55 +286,21 @@ function NonDevLolosResult({ developer }: { developer: Developer }) {
           variant="h4"
           className="font-montserrat max-lg:w-full max-lg:text-2xl font-extrabold text-blue-900 text-center leading-4"
         >
-          SELAMAT KAMU LOLOS <br /> TAHAP INTERVIEW
+          MAAF KAMU BELUM DITERIMA
         </Typography>
         <Typography
           variant="h6"
-          className="font-montserrat mt-2 w-3/4 max-lg:w-full font-semibold text-blue-900 text-center leading-4"
+          className="font-montserrat mt-2 w-3/4 max-lg:w-full font-semibold text-blue-900 text-center leading-5"
         >
-          Silahkan Cek Jadwal Interview untuk Divisi Non-Developer!
-        </Typography>
-      </div>
-      <ButtonLink
-        href="https://docs.google.com/spreadsheets/d/13S1foWA6PaKL8DHBmYz31l8zpHppya_djaFsboz7kJY/edit?usp=sharing"
-        variant="yellow"
-        className="rounded-none max-lg:w-full mt-8 w-1/2 max-lg:mt-6 text-black font-bold bg-yellow-400 hover:bg-yellow-500"
-      >
-        Cek Jadwal Interview Non-Dev
-      </ButtonLink>
-    </>
-  );
-}
-
-// Komponen untuk hasil Non-Developer yang Tidak Lolos
-function NonDevTidakLolosResult({ developer }: { developer: Developer }) {
-  return (
-    <>
-      <div className="mt-4 flex flex-col items-center justify-center">
-        <Typography
-          variant="h6"
-          className="font-montserrat font-semibold max-lg:text-xl text-blue-900 text-center leading-4"
-        >
-          Hai {developer.namaDepan} 👋
-        </Typography>
-        <Typography
-          variant="h4"
-          className="font-montserrat max-lg:w-full max-lg:text-2xl font-extrabold text-blue-900 text-center leading-4"
-        >
-          MAAF KAMU BELUM <br /> LOLOS KALI INI
-        </Typography>
-        <Typography
-          variant="p"
-          className="font-montserrat mt-2 w-3/4 max-lg:w-full font-semibold text-blue-900 text-center leading-4"
-        >
-          Tetap Semangat! Masih ada kesempatan lain di masa menunggumu.
+          Bukan berarti kamu gagal bukan berarti kamu tidak cukup baik. Terus
+          asah kemampuanmu, terus berproses, dan jangan menyerah!
         </Typography>
       </div>
     </>
   );
 }
 
-// Komponen untuk NRP yang overlap - perlu suffix
+// Komponen untuk NRP yang overlap - perlu suffix (saat ini tidak ada)
 function OverlapNRPResult({ nrp }: { nrp: string }) {
   return (
     <>
@@ -266,6 +347,14 @@ function NRPTidakDitemukanResult() {
         >
           Mohon periksa kembali NRP yang Anda masukkan
         </Typography>
+
+        <ButtonLink
+          href="/"
+          variant="yellow"
+          className="rounded-none max-lg:w-full mt-6 w-1/2 text-black font-bold bg-yellow-400 hover:bg-yellow-500"
+        >
+          Coba Lagi
+        </ButtonLink>
       </div>
     </>
   );

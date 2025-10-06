@@ -7,9 +7,25 @@ export interface Developer {
   divisi: "developer" | "community" | "nondev_lolos" | "nondev_tidaklolos";
 }
 
+// Type untuk data developer tanpa divisi
+interface DeveloperData {
+  nrp: string;
+  nama: string;
+  namaDepan: string;
+  posisi: string;
+}
+
+// Type untuk structure data
+interface DevelopersDataStructure {
+  developer: Record<string, DeveloperData>;
+  community: Record<string, DeveloperData>;
+  nondev_lolos: Record<string, DeveloperData>;
+  nondev_tidaklolos: Record<string, DeveloperData>;
+}
+
 // Data terenkripsi - lebih sulit dibaca di inspect element
 const _encryptedData = [
-  // Developer Utama - menggunakan hash untuk NRP
+  // Developer Utama - menggunakan hash untuk NRP tertentu
   {
     h: "d7f5e8c1", // hash dari NRP tertentu
     n: "VmluZ1Zlcmw=", // encoded nama
@@ -22,751 +38,192 @@ const _encryptedData = [
 ];
 
 // Struktur data yang baru dengan format yang diminta
-const developersData = {
+const developersData: DevelopersDataStructure = {
   developer: {
     "5025241233": {
       nrp: "5025241233",
       nama: "Rifat Qurratu Aini Irwandi",
       namaDepan: "Rifat",
-      posisi: "Developer",
-    },
-    "5025241010": {
-      nrp: "5025241010",
-      nama: "Muhammad Dzaky Radithya Ryrdi",
-      namaDepan: "Dzaky",
-      posisi: "Developer",
+      posisi: "UI/UX Developer",
     },
     "5025231053": {
       nrp: "5025231053",
       nama: "Mohammad Farhan Nazrul Ilhami",
       namaDepan: "Farhan",
-      posisi: "Developer",
+      posisi: "UI/UX Developer",
     },
     "5054251047": {
       nrp: "5054251047",
       nama: "A. Toriq Azhar",
       namaDepan: "Toriq",
-      posisi: "Developer",
+      posisi: "UI/UX Developer",
     },
     "5025241028": {
       nrp: "5025241028",
       nama: "Himawan Rakha Bhadra",
       namaDepan: "Himawan",
-      posisi: "Developer",
+      posisi: "UI/UX Developer",
     },
     "5053241050": {
       nrp: "5053241050",
       nama: "Ararya Arka Anugraha",
       namaDepan: "Ararya",
-      posisi: "Developer",
+      posisi: "Frontend Developer",
     },
     "5054241019": {
       nrp: "5054241019",
       nama: "Ferri Adi Prasetya",
       namaDepan: "Ferri",
-      posisi: "Developer",
+      posisi: "Frontend Developer",
     },
     "5054241007": {
       nrp: "5054241007",
       nama: "Muhamad Fatih Al Fawwaz",
       namaDepan: "Fatih",
-      posisi: "Developer",
+      posisi: "Frontend Developer",
     },
     "5053231008": {
       nrp: "5053231008",
       nama: "Nur Muhammad Faiz",
       namaDepan: "Faiz",
-      posisi: "Developer",
+      posisi: "Frontend Developer",
     },
     "5025231168": {
       nrp: "5025231168",
       nama: "Kevin Andreas",
       namaDepan: "Kevin",
-      posisi: "Developer",
-    },
-    "5025241218": {
-      nrp: "5025241218",
-      nama: "Ida Bagus Gde Dimas Sutha Maha",
-      namaDepan: "Dimas",
-      posisi: "Developer",
+      posisi: "Frontend Developer",
     },
     "5025231216": {
       nrp: "5025231216",
       nama: "Huraira Shenmue Mahanee",
       namaDepan: "Huraira",
-      posisi: "Developer",
+      posisi: "Backend Developer",
     },
     "5025231091": {
       nrp: "5025231091",
       nama: "Fernando",
       namaDepan: "Fernando",
-      posisi: "Developer",
+      posisi: "Backend Developer",
     },
     "5053251021": {
       nrp: "5053251021",
       nama: "Ahmad Zaidaan",
       namaDepan: "Ahmad",
-      posisi: "Developer",
-    },
-    "5025251129": {
-      nrp: "5025251129",
-      nama: "Muhammad Brahmana Priambudi",
-      namaDepan: "Brahmana",
-      posisi: "Developer",
+      posisi: "Backend Developer",
     },
     "5025231115": {
       nrp: "5025231115",
       nama: "Arkananta Masarief",
       namaDepan: "Arkananta",
-      posisi: "Developer",
+      posisi: "Backend Developer",
     },
     "5025241142": {
       nrp: "5025241142",
       nama: "Ananda Aryasatya Zhafran Aqila",
       namaDepan: "Ananda",
-      posisi: "Developer",
+      posisi: "Backend Developer",
     },
     "5025231139": {
       nrp: "5025231139",
       nama: "Hamasah Fatiy Dakhilullah",
       namaDepan: "Hamasah",
-      posisi: "Developer",
+      posisi: "DevOps Developer",
     },
     "5053251017": {
       nrp: "5053251017",
       nama: "Daffa Randika",
       namaDepan: "Daffa",
-      posisi: "Developer",
+      posisi: "Mobile Developer",
     },
     "5053251041": {
       nrp: "5053251041",
       nama: "Moch Siril Wafa Zidane Feliano",
       namaDepan: "Siril",
-      posisi: "Developer",
+      posisi: "Mobile Developer",
     },
   },
 
-  community: {
-    "5025251053": {
-      nrp: "5025251053",
-      nama: "M. Haziq Ridwan Parsa",
-      namaDepan: "Haziq",
-      posisi: "Community Member",
-    },
-    "5025251118": {
-      nrp: "5025251118",
-      nama: "Anang Ardhiansyah",
-      namaDepan: "Anang",
-      posisi: "Community Member",
-    },
-    "5025251137": {
-      nrp: "5025251137",
-      nama: "Rayyan Aqsha Raditya",
-      namaDepan: "Rayyan",
-      posisi: "Community Member",
-    },
-    "5054251036": {
-      nrp: "5054251036",
-      nama: "Prima Surya Nusantara",
-      namaDepan: "Prima",
-      posisi: "Community Member",
-    },
-    "5025251086": {
-      nrp: "5025251086",
-      nama: "Muhammad Fawwas Al Haqqy Agung Putra",
-      namaDepan: "Fawwas",
-      posisi: "Community Member",
-    },
-    "5025241051": {
-      nrp: "5025241051",
-      nama: "Reza Afzaal Faizullah Taqy",
-      namaDepan: "Reza",
-      posisi: "Community Member",
-    },
-    "5025231174": {
-      nrp: "5025231174",
-      nama: "Faiz Adli Nugraha",
-      namaDepan: "Faiz",
-      posisi: "Community Member",
-    },
-    "5025251020": {
-      nrp: "5025251020",
-      nama: "Firsto Al Kautsar Jagad Kurniaji",
-      namaDepan: "Firsto",
-      posisi: "Community Member",
-    },
-    "5025241023": {
-      nrp: "5025241023",
-      nama: "Hamzah Ali Abdillah",
-      namaDepan: "Hamzah",
-      posisi: "Community Member",
-    },
-    "5025241171": {
-      nrp: "5025241171",
-      nama: "Muhammad Sholihuddin Rizky",
-      namaDepan: "Sholih",
-      posisi: "Community Member",
-    },
-    "5053251026": {
-      nrp: "5053251026",
-      nama: "Safia Rashida Raya",
-      namaDepan: "Safia",
-      posisi: "Community Member",
-    },
-    "5025231177": {
-      nrp: "5025231177",
-      nama: "Muhammad Baihaqi Dawanis",
-      namaDepan: "Baihaqi",
-      posisi: "Community Member",
-    },
-    "5025231257": {
-      nrp: "5025231257",
-      nama: "Juang Maulana Taruna Putra",
-      namaDepan: "Juang",
-      posisi: "Community Member",
-    },
-    "5053231014": {
-      nrp: "5053231014",
-      nama: "Geraldo Benjamin Nainggolan",
-      namaDepan: "Geraldo",
-      posisi: "Community Member",
-    },
-    "5025251100": {
-      nrp: "5025251100",
-      nama: "Yudith Hafiz Rabbani",
-      namaDepan: "Yudith",
-      posisi: "Community Member",
-    },
-    "5025241160": {
-      nrp: "5025241160",
-      nama: "Hartmann Kanisius Galla' Massang",
-      namaDepan: "Hartmann",
-      posisi: "Community Member",
-    },
-    "5025251102": {
-      nrp: "5025251102",
-      nama: "Muhammad Ludaka Firdaus",
-      namaDepan: "Ludaka",
-      posisi: "Community Member",
-    },
-    "5053251007": {
-      nrp: "5053251007",
-      nama: "Abdul Ghofur Luqman Salim",
-      namaDepan: "Ghofur",
-      posisi: "Community Member",
-    },
-    "5025241156": {
-      nrp: "5025241156",
-      nama: "Frenaldy Bestabba Hasugian",
-      namaDepan: "Frenaldy",
-      posisi: "Community Member",
-    },
-    "5025241148": {
-      nrp: "5025241148",
-      nama: "Muhammad Zaky Zein",
-      namaDepan: "Zaky",
-      posisi: "Community Member",
-    },
-    "5053241031": {
-      nrp: "5053241031",
-      nama: "Jovan Oberto Mishael Sinaga",
-      namaDepan: "Jovan",
-      posisi: "Community Member",
-    },
-    "5025251024": {
-      nrp: "5025251024",
-      nama: "Rinaltra Nabasa S",
-      namaDepan: "Rinaltra",
-      posisi: "Community Member",
-    },
-    "5025251245": {
-      nrp: "5025251245",
-      nama: "Hasna Nabila Hanim",
-      namaDepan: "Hasna",
-      posisi: "Community Member",
-    },
-    "5053231001": {
-      nrp: "5053231001",
-      nama: "Made Satya Dhananjaya",
-      namaDepan: "Satya",
-      posisi: "Community Member",
-    },
-    "5025241094": {
-      nrp: "5025241094",
-      nama: "Fayza Lathifah Humam",
-      namaDepan: "Fayza",
-      posisi: "Community Member",
-    },
-    "5025251120": {
-      nrp: "5025251120",
-      nama: "Alogo Hasiholan Napitupulu",
-      namaDepan: "Alogo",
-      posisi: "Community Member",
-    },
-    "5025251178": {
-      nrp: "5025251178",
-      nama: "Fazli Irham Ramadhan Abdillah",
-      namaDepan: "Fazli",
-      posisi: "Community Member",
-    },
-    "5025251115": {
-      nrp: "5025251115",
-      nama: "Rayyan Aura Rahman",
-      namaDepan: "Rayyan",
-      posisi: "Community Member",
-    },
-    "5054251039": {
-      nrp: "5054251039",
-      nama: "Muhammad Dzaky Haidar",
-      namaDepan: "Dzaky",
-      posisi: "Community Member",
-    },
-    "5025251230": {
-      nrp: "5025251230",
-      nama: "Naila Hikaru",
-      namaDepan: "Naila",
-      posisi: "Community Member",
-    },
-    "5025251243": {
-      nrp: "5025251243",
-      nama: "Irsyad Akbar",
-      namaDepan: "Irsyad",
-      posisi: "Community Member",
-    },
-    "5025251191": {
-      nrp: "5025251191",
-      nama: "Salsabila Hana Adniah",
-      namaDepan: "Salsabila",
-      posisi: "Community Member",
-    },
-    "5025251062": {
-      nrp: "5025251062",
-      nama: "Aisyah Putri Diza",
-      namaDepan: "Aisyah",
-      posisi: "Community Member",
-    },
-    "5025251200": {
-      nrp: "5025251200",
-      nama: "Rafi Eka Pramudya",
-      namaDepan: "Rafi",
-      posisi: "Community Member",
-    },
-    "5025241065": {
-      nrp: "5025241065",
-      nama: "Aji Zaenul Musthofa",
-      namaDepan: "Aji",
-      posisi: "Community Member",
-    },
-    "5054251001": {
-      nrp: "5054251001",
-      nama: "Benedictus Ryu Gunawan",
-      namaDepan: "Ryu",
-      posisi: "Community Member",
-    },
-    "5025251031": {
-      nrp: "5025251031",
-      nama: "Najwan Sigit Cahya Buana",
-      namaDepan: "Najwan",
-      posisi: "Community Member",
-    },
-    "5025251196": {
-      nrp: "5025251196",
-      nama: "I Dewa Gede Putra Susila",
-      namaDepan: "Putra",
-      posisi: "Community Member",
-    },
-    "5025251036": {
-      nrp: "5025251036",
-      nama: "Darwisy Ahmad Alfayyadl",
-      namaDepan: "Darwisy",
-      posisi: "Community Member",
-    },
-    "5025231018": {
-      nrp: "5025231018",
-      nama: "Cathleen Gracia",
-      namaDepan: "Cathleen",
-      posisi: "Community Member",
-    },
-    "5054251005": {
-      nrp: "5054251005",
-      nama: "Muhamad Nafi' Mulyo",
-      namaDepan: "Nafi",
-      posisi: "Community Member",
-    },
-    "5025251195": {
-      nrp: "5025251195",
-      nama: "Dafa Dega Wijaya",
-      namaDepan: "Dafa",
-      posisi: "Community Member",
-    },
-    "5025251154": {
-      nrp: "5025251154",
-      nama: "Boy Steven Benaya Aritonang",
-      namaDepan: "Boy",
-      posisi: "Community Member",
-    },
-    "5025241058": {
-      nrp: "5025241058",
-      nama: "Addien Zafriyan Al Akhsan",
-      namaDepan: "Addien",
-      posisi: "Community Member",
-    },
-    "5025241104": {
-      nrp: "5025241104",
-      nama: "Raden Kurniawan Agung Fitrianto",
-      namaDepan: "Raden",
-      posisi: "Community Member",
-    },
-    "5054251024": {
-      nrp: "5054251024",
-      nama: "Muhammad Irzam Hafis Fabiansyah",
-      namaDepan: "Irzam",
-      posisi: "Community Member",
-    },
-    "5025241137": {
-      nrp: "5025241137",
-      nama: "Afarrel Febryan Ghiffari Putra Andy",
-      namaDepan: "Afarrel",
-      posisi: "Community Member",
-    },
-    "5025241134": {
-      nrp: "5025241134",
-      nama: "Gilbran Mahdavikia Raja",
-      namaDepan: "Gilbran",
-      posisi: "Community Member",
-    },
-    "5025241127": {
-      nrp: "5025241127",
-      nama: "Mochammad Irfan Sandy",
-      namaDepan: "Irfan",
-      posisi: "Community Member",
-    },
-    "5053241030": {
-      nrp: "5053241030",
-      nama: "Muhammad Khalid Ash Shiddiqi",
-      namaDepan: "Khalid",
-      posisi: "Community Member",
-    },
-    "5025251246": {
-      nrp: "5025251246",
-      nama: "Hamizan Rifqi Afandi",
-      namaDepan: "Hamizan",
-      posisi: "Community Member",
-    },
-    "5053251020": {
-      nrp: "5053251020",
-      nama: "Yuwand Arteta Hydri Wahyu Putra",
-      namaDepan: "Yuwand",
-      posisi: "Community Member",
-    },
-    "5025241132": {
-      nrp: "5025241132",
-      nama: "Jeihan Shawmy Prasetya",
-      namaDepan: "Jeihan",
-      posisi: "Community Member",
-    },
-    "5025241234": {
-      nrp: "5025241234",
-      nama: "Justin Valentino",
-      namaDepan: "Justin",
-      posisi: "Community Member",
-    },
-    "5053241016": {
-      nrp: "5053241016",
-      nama: "Alhaura Rahmatunnisa Harsanto",
-      namaDepan: "Alhaura",
-      posisi: "Community Member",
-    },
-    "5025241204": {
-      nrp: "5025241204",
-      nama: "Fathiya Nayla Husna Wibowo",
-      namaDepan: "Fathiya",
-      posisi: "Community Member",
-    },
-    "5025251153": {
-      nrp: "5025251153",
-      nama: "I Gede Made Adi Putra Adnyana",
-      namaDepan: "Adi",
-      posisi: "Community Member",
-    },
-    "5025241120": {
-      nrp: "5025241120",
-      nama: "Raditya Zhafran Pranuja",
-      namaDepan: "Raditya",
-      posisi: "Community Member",
-    },
-    "5025241036": {
-      nrp: "5025241036",
-      nama: "Muhammad Quthbi Danish Abqori",
-      namaDepan: "Quthbi",
-      posisi: "Community Member",
-    },
-    "5025241029": {
-      nrp: "5025241029",
-      nama: "Berwyn Rafif Alvaro",
-      namaDepan: "Berwyn",
-      posisi: "Community Member",
-    },
-    "5053251030": {
-      nrp: "5053251030",
-      nama: "La Ode Muhammad Ghofaruddin S",
-      namaDepan: "Ghofaruddin",
-      posisi: "Community Member",
-    },
-    "5025251184": {
-      nrp: "5025251184",
-      nama: "Claresta Amelinda Hutauruk",
-      namaDepan: "Claresta",
-      posisi: "Community Member",
-    },
-    "5053251025": {
-      nrp: "5053251025",
-      nama: "Muhammad Fakhry Ziyad Dhiyaulhaq",
-      namaDepan: "Fakhry",
-      posisi: "Community Member",
-    },
-    "5025241004": {
-      nrp: "5025241004",
-      nama: "Razan Widya Reswara",
-      namaDepan: "Razan",
-      posisi: "Community Member",
-    },
-    "5025251124": {
-      nrp: "5025251124",
-      nama: "Muhammad Alhady Rizq",
-      namaDepan: "Alhady",
-      posisi: "Community Member",
-    },
-    "5025251130": {
-      nrp: "5025251130",
-      nama: "Aziz Alfarisi",
-      namaDepan: "Aziz",
-      posisi: "Community Member",
-    },
-    "5053251004": {
-      nrp: "5053251004",
-      nama: "M. Khauzaky Amkanaky",
-      namaDepan: "Khauzaky",
-      posisi: "Community Member",
-    },
-    "5054251026": {
-      nrp: "5054251026",
-      nama: "Jonathan Joyo Wibowo",
-      namaDepan: "Jonathan",
-      posisi: "Community Member",
-    },
-    "5025251174": {
-      nrp: "5025251174",
-      nama: "Marco Marcelino",
-      namaDepan: "Marco",
-      posisi: "Community Member",
-    },
-    "5025251249": {
-      nrp: "5025251249",
-      nama: "Enver Alif Wirawan",
-      namaDepan: "Enver",
-      posisi: "Community Member",
-    },
-    "5025241163": {
-      nrp: "5025241163",
-      nama: "Maulana Ikhsan",
-      namaDepan: "Maulana",
-      posisi: "Community Member",
-    },
-    "5025241090": {
-      nrp: "5025241090",
-      nama: "Willy Dava Nugraha",
-      namaDepan: "Willy",
-      posisi: "Community Member",
-    },
-  },
+  community: {},
 
   nondev_lolos: {
     "5025251045": {
       nrp: "5025251045",
       nama: "Khalisya Zahra Putria Rahman",
       namaDepan: "Khalisya",
-      posisi: "Non-Developer",
-    },
-    "5025231129": {
-      nrp: "5025231129",
-      nama: "Akmal Bobsaid",
-      namaDepan: "Akmal",
-      posisi: "Non-Developer",
-    },
-    "5025241046": {
-      nrp: "5025241046",
-      nama: "Mikail Ibrahim Hakim",
-      namaDepan: "Mikail",
-      posisi: "Non-Developer",
-    },
-    "5025241129": {
-      nrp: "5025241129",
-      nama: "Mochamad Ramadhan Aditya Rachman",
-      namaDepan: "Ramadhan",
-      posisi: "Non-Developer",
-    },
-    "5025241045": {
-      nrp: "5025241045",
-      nama: "Muhammad Fathan Haiban Rafif",
-      namaDepan: "Fathan",
-      posisi: "Non-Developer",
-    },
-    "5025241235": {
-      nrp: "5025241235",
-      nama: "Shafira Nauraishma Zahida",
-      namaDepan: "Shafira",
-      posisi: "Non-Developer",
-    },
-    "5025251202": {
-      nrp: "5025251202",
-      nama: "Fawwas Razzan Sulfi Andreyawan",
-      namaDepan: "Fawwas",
-      posisi: "Non-Developer",
-    },
-    "5054251038": {
-      nrp: "5054251038",
-      nama: "Jordan Sebastian Simatupang",
-      namaDepan: "Jordan",
-      posisi: "Non-Developer",
-    },
-    "5053251040": {
-      nrp: "5053251040",
-      nama: "Muhammad Zaydan Anugrah Pratama",
-      namaDepan: "Zaydan",
-      posisi: "Non-Developer",
-    },
-    "5025231252": {
-      nrp: "5025231252",
-      nama: "Rafael Jonathan Raja Nicholas Harianja",
-      namaDepan: "Rafael",
-      posisi: "Non-Developer",
-    },
-    "5054251014": {
-      nrp: "5054251014",
-      nama: "Muhammad Rafie Safaraz Barus",
-      namaDepan: "Rafie",
-      posisi: "Non-Developer",
-    },
-    "5053241042": {
-      nrp: "5053241042",
-      nama: "Ziyad Raziq Lahitidra Afey",
-      namaDepan: "Ziyad",
-      posisi: "Non-Developer",
-    },
-    "5025241055": {
-      nrp: "5025241055",
-      nama: "Pradhipta Raja Mahendra",
-      namaDepan: "Pradhipta",
-      posisi: "Non-Developer",
-    },
-    "5025241234": {
-      nrp: "5025241234",
-      nama: "Justin Valentino",
-      namaDepan: "Justin",
-      posisi: "Non-Developer",
-    },
-    "5053251035": {
-      nrp: "5053251035",
-      nama: "Azendra Kenar Arviant",
-      namaDepan: "Azendra",
-      posisi: "Non-Developer",
-    },
-    "5025251135": {
-      nrp: "5025251135",
-      nama: "Gadhiza Edgina Ikhwana Putri",
-      namaDepan: "Gadhiza",
-      posisi: "Non-Developer",
-    },
-    "5025241037": {
-      nrp: "5025241037",
-      nama: "Agil Lukman Hakim Muchdi",
-      namaDepan: "Agil",
-      posisi: "Non-Developer",
-    },
-    "5054251042": {
-      nrp: "5054251042",
-      nama: "Muhammad Farid Wijdan",
-      namaDepan: "Farid",
-      posisi: "Non-Developer",
-    },
-    "5025241205": {
-      nrp: "5025241205",
-      nama: "Mirza Rifai Dhiaurrahman",
-      namaDepan: "Mirza",
-      posisi: "Non-Developer",
-    },
-    "5025241198": {
-      nrp: "5025241198",
-      nama: "Dwinanda Rakhish Baley",
-      namaDepan: "Dwinanda",
-      posisi: "Non-Developer",
-    },
-    "5054241002": {
-      nrp: "5054241002",
-      nama: "Tuti Purwaningsih",
-      namaDepan: "Tuti",
-      posisi: "Non-Developer",
-    },
-    "5025241022": {
-      nrp: "5025241022",
-      nama: "Safa Mashita",
-      namaDepan: "Safa",
-      posisi: "Non-Developer",
-    },
-    "5025251176": {
-      nrp: "5025251176",
-      nama: "Kevinansyah Salviano Rachmadewa",
-      namaDepan: "Kevinansyah",
-      posisi: "Non-Developer",
-    },
-    "5025241110": {
-      nrp: "5025241110",
-      nama: "Severinus Fabian Tanuwidjaja",
-      namaDepan: "Fabian",
-      posisi: "Non-Developer",
-    },
-    "5053241047": {
-      nrp: "5053241047",
-      nama: "Fathiya Haya Shafa Kamila Setiadi",
-      namaDepan: "Fathiya",
-      posisi: "Non-Developer",
-    },
-    "5053251014": {
-      nrp: "5053251014",
-      nama: "Muhammad Rafi Riansjah",
-      namaDepan: "Rafi",
-      posisi: "Non-Developer",
+      posisi: "Bendahara",
     },
     "5025241069": {
       nrp: "5025241069",
       nama: "Erica Triana Widyastuti",
       namaDepan: "Erica",
-      posisi: "Non-Developer",
+      posisi: "Sekre",
     },
-    "5025241112": {
-      nrp: "5025241112",
-      nama: "Dafa Kumara Sahasika",
-      namaDepan: "Dafa",
-      posisi: "Non-Developer",
+    "5025241110": {
+      nrp: "5025241110",
+      nama: "Severinus Fabian Tanuwidjaja",
+      namaDepan: "Fabian",
+      posisi: "HR",
     },
-    "5025251100": {
-      nrp: "5025251100",
-      nama: "Yudith Hafiz Rabbani",
-      namaDepan: "Yudith",
-      posisi: "Non-Developer",
+    "5025241235": {
+      nrp: "5025241235",
+      nama: "Shafira Nauraishma Zahida",
+      namaDepan: "Shafira",
+      posisi: "HR",
     },
-    "5025231177": {
-      nrp: "5025231177",
-      nama: "Muhammad Baihaqi Dawanis",
-      namaDepan: "Baihaqi",
-      posisi: "Non-Developer",
+    "5025231129": {
+      nrp: "5025231129",
+      nama: "Akmal Bobsaid",
+      namaDepan: "Akmal",
+      posisi: "BA",
     },
     "5025241010": {
       nrp: "5025241010",
       nama: "Muhammad Dzaky Radithya Ryrdi",
       namaDepan: "Dzaky",
-      posisi: "Non-Developer",
+      posisi: "BA",
+    },
+    "5025241022": {
+      nrp: "5025241022",
+      nama: "Safa Mashita",
+      namaDepan: "Safa",
+      posisi: "BO",
+    },
+    "5025251135": {
+      nrp: "5025251135",
+      nama: "Gadhiza Edgina Ikhwana Putri",
+      namaDepan: "Gadhiza",
+      posisi: "BO",
+    },
+    "5025231252": {
+      nrp: "5025231252",
+      nama: "Rafael Jonathan Raja Nicholas Harianja",
+      namaDepan: "Rafael",
+      posisi: "MR (On Job Training)",
+    },
+    "5054251042": {
+      nrp: "5054251042",
+      nama: "Muhammad Farid Wijdan",
+      namaDepan: "Farid",
+      posisi: "SMS (On Job Training)",
+    },
+    "5025241037": {
+      nrp: "5025241037",
+      nama: "Agil Lukman Hakim Muchdi",
+      namaDepan: "Agil",
+      posisi: "SMS (On Job Training)",
+    },
+    "5025251176": {
+      nrp: "5025251176",
+      nama: "Kevinansyah Salviano Rachmadewa",
+      namaDepan: "Kevinansyah",
+      posisi: "SMS (On Job Training)",
+    },
+    "5053251014": {
+      nrp: "5053251014",
+      nama: "Muhammad Rafi Riansjah",
+      namaDepan: "Rafi",
+      posisi: "Production (On Job Training)",
     },
   },
 
@@ -784,7 +241,7 @@ const developersData = {
       posisi: "Non-Developer (Tidak Lolos)",
     },
     "5053251023": {
-      nrp: "5025231053",
+      nrp: "5053251023",
       nama: "Afrel Zharif Muflih",
       namaDepan: "Afrel",
       posisi: "Non-Developer (Tidak Lolos)",
@@ -795,23 +252,264 @@ const developersData = {
       namaDepan: "Rayyan",
       posisi: "Non-Developer (Tidak Lolos)",
     },
+    "5025241218": {
+      nrp: "5025241218",
+      nama: "Ida Bagus Gde Dimas Sutha Maha",
+      namaDepan: "Dimas",
+      posisi: "Developer (Tidak Lolos)",
+    },
+    "5025251129": {
+      nrp: "5025251129",
+      nama: "Muhammad Brahmana Priambudi",
+      namaDepan: "Brahmana",
+      posisi: "Developer (Tidak Lolos)",
+    },
+    "5054241002": {
+      nrp: "5054241002",
+      nama: "Tuti Purwaningsih",
+      namaDepan: "Tuti",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025251100": {
+      nrp: "5025251100",
+      nama: "Yudith Hafiz Rabbani",
+      namaDepan: "Yudith",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5053241047": {
+      nrp: "5053241047",
+      nama: "Fathiya Haya Shafa Kamila Setiadi",
+      namaDepan: "Fathiya",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025241129": {
+      nrp: "5025241129",
+      nama: "Mochamad Ramadhan Aditya Rachman",
+      namaDepan: "Ramadhan",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5053251035": {
+      nrp: "5053251035",
+      nama: "Azendra Kenar Arviant",
+      namaDepan: "Azendra",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025241046": {
+      nrp: "5025241046",
+      nama: "Mikail Ibrahim Hakim",
+      namaDepan: "Mikail",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025241234": {
+      nrp: "5025241234",
+      nama: "Justin Valentino",
+      namaDepan: "Justin",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025251202": {
+      nrp: "5025251202",
+      nama: "Fawwas Razzan Sulfi Andreyawan",
+      namaDepan: "Fawwas",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5053251040": {
+      nrp: "5053251040",
+      nama: "Muhammad Zaydan Anugrah Pratama",
+      namaDepan: "Zaydan",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5054251014": {
+      nrp: "5054251014",
+      nama: "Muhammad Rafie Safaraz Barus",
+      namaDepan: "Rafie",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5053241042": {
+      nrp: "5053241042",
+      nama: "Ziyad Raziq Lahitidra Afey",
+      namaDepan: "Ziyad",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025231177": {
+      nrp: "5025231177",
+      nama: "Muhammad Baihaqi Dawanis",
+      namaDepan: "Baihaqi",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025241205": {
+      nrp: "5025241205",
+      nama: "Mirza Rifai Dhiaurrahman",
+      namaDepan: "Mirza",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5054251038": {
+      nrp: "5054251038",
+      nama: "Jordan Sebastian Simatupang",
+      namaDepan: "Jordan",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025241112": {
+      nrp: "5025241112",
+      nama: "Dafa Kumara Sahasika",
+      namaDepan: "Dafa",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025241198": {
+      nrp: "5025241198",
+      nama: "Dwinanda Rakhish Baley",
+      namaDepan: "Dwinanda",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025241055": {
+      nrp: "5025241055",
+      nama: "Pradhipta Raja Mahendra",
+      namaDepan: "Pradhipta",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
+    "5025241045": {
+      nrp: "5025241045",
+      nama: "Muhammad Fathan Haiban Rafif",
+      namaDepan: "Fathan",
+      posisi: "Non-Developer (Tidak Lolos)",
+    },
   },
 };
 
-// Daftar NRP yang memiliki overlap - perlu suffix untuk membedakan
-const overlapNRPs = [
-  "5025251100", // Yudith Hafiz Rabbani (community + nondev_lolos)
-  "5025251115", // Rayyan Aura Rahman (community + nondev_tidaklolos)
-  "5025241234", // Justin Valentino (community + nondev_lolos)
-  "5025231177", // Muhammad Baihaqi Dawanis (community + nondev_lolos)
-  "5025241010", // Muhammad Dzaky Radithya Ryrdi (developer + nondev_lolos)
-];
+// Daftar NRP yang memiliki overlap - tidak ada lagi overlap karena community kosong
+const overlapNRPs: string[] = [];
+
+// Function untuk mendapatkan link WhatsApp group berdasarkan posisi
+export function getWhatsAppGroupLink(posisi: string): string {
+  const posisiLower = posisi.toLowerCase();
+
+  // Link untuk developer yang lolos
+  if (posisiLower.includes("backend")) {
+    return "https://chat.whatsapp.com/CV5gtF8rYua8NNNou4hJpS";
+  }
+
+  if (posisiLower.includes("frontend")) {
+    return "https://chat.whatsapp.com/HHs4TfVJaWSDe0hnj0Gsj9";
+  }
+
+  if (posisiLower.includes("ui/ux")) {
+    return "https://chat.whatsapp.com/I7jvsPoBfwwLq11Cpet9aX";
+  }
+
+  if (posisiLower.includes("mobile")) {
+    return "https://chat.whatsapp.com/JY7gKk7Jv4WB1VHX8SgsBe";
+  }
+
+  if (posisiLower.includes("devops")) {
+    return "https://chat.whatsapp.com/HRdrqWTGMlaBhnEdd30WiJ"; // Link umum dev
+  }
+
+  // Link untuk non-developer yang lolos
+  if (posisiLower.includes("bendahara") || posisiLower.includes("sekre")) {
+    return "https://chat.whatsapp.com/CKcuYbjhK7pBJYxOXmNA84";
+  }
+
+  if (posisiLower.includes("ba") || posisiLower.includes("bo")) {
+    return "https://chat.whatsapp.com/DDywb4vXYzPFAVtNDC4EYr";
+  }
+
+  if (
+    posisiLower.includes("production") ||
+    posisiLower.includes("sms") ||
+    posisiLower.includes("mr")
+  ) {
+    return "https://chat.whatsapp.com/F9UeP4dQSDw2DGivMzbIzL";
+  }
+
+  if (posisiLower.includes("hr")) {
+    return "https://chat.whatsapp.com/HRdrqWTGMlaBhnEdd30WiJ"; // Link umum, sesuaikan jika ada link khusus HR
+  }
+
+  // Default link untuk developer umum
+  return "https://chat.whatsapp.com/HRdrqWTGMlaBhnEdd30WiJ";
+}
+
+// Function untuk mendapatkan pesan selamat berdasarkan divisi dan posisi
+export function getCongratulationMessage(
+  divisi: string,
+  posisi: string,
+): string {
+  const baseMessage =
+    "Selamat! Kamu menjadi bagian dari keluarga Flexoo sebagai";
+
+  if (divisi === "developer") {
+    return `${baseMessage} Developer dengan role ${posisi}`;
+  }
+
+  if (divisi === "nondev_lolos") {
+    return `${baseMessage} Non-Developer dengan role ${posisi}`;
+  }
+
+  if (divisi === "community") {
+    return `${baseMessage} Community Member dengan role ${posisi}`;
+  }
+
+  // Default message
+  return `${baseMessage} ${posisi}`;
+}
+
+// Function untuk mendapatkan role yang lebih readable
+export function getReadableRole(posisi: string): string {
+  const posisiMap: Record<string, string> = {
+    "UI/UX Developer": "UI/UX DEVELOPER",
+    "Frontend Developer": "FRONTEND DEVELOPER",
+    "Backend Developer": "BACKEND DEVELOPER",
+    "Mobile Developer": "MOBILE DEVELOPER",
+    "DevOps Developer": "DEVOPS DEVELOPER",
+    Bendahara: "BENDAHARA",
+    Sekre: "SEKRETARIS",
+    HR: "HUMAN RESOURCES",
+    BA: "BUSINESS ANALYST",
+    BO: "BUSINESS OPERATIONS",
+    "MR (On Job Training)": "MARKET RESEARCH (ON JOB TRAINING)",
+    "SMS (On Job Training)": "SOCIAL MEDIA SPECIALIST (ON JOB TRAINING)",
+    "Production (On Job Training)": "PRODUCTION (ON JOB TRAINING)",
+  };
+
+  return posisiMap[posisi] || posisi.toUpperCase();
+}
+
+// Function untuk mendapatkan informasi lengkap untuk announcement
+export function getAnnouncementInfo(developer: Developer): {
+  message: string;
+  whatsappLink: string;
+  readableRole: string;
+  isAccepted: boolean;
+} {
+  const isAccepted =
+    developer.divisi === "developer" || developer.divisi === "nondev_lolos";
+  const readableRole = getReadableRole(developer.posisi);
+
+  if (!isAccepted) {
+    return {
+      message:
+        "Terima kasih atas partisipasimu dalam seleksi Flexoo. Tetap semangat untuk kesempatan berikutnya!",
+      whatsappLink: "",
+      readableRole,
+      isAccepted: false,
+    };
+  }
+
+  const message = getCongratulationMessage(developer.divisi, readableRole);
+  const whatsappLink = getWhatsAppGroupLink(developer.posisi);
+
+  return {
+    message,
+    whatsappLink,
+    readableRole,
+    isAccepted: true,
+  };
+}
 
 // Function untuk mencari developer berdasarkan NRP (menggunakan format baru)
 export function findDeveloperByNRP(nrp: string): Developer | null {
-  // Handle suffix untuk overlap
+  // Handle suffix untuk overlap (meskipun saat ini tidak ada overlap)
   let actualNrp = nrp;
-  let preferredCategory: string | null = null;
+  let preferredCategory: keyof DevelopersDataStructure | null = null;
 
   // Cek jika ada suffix -dev atau -nondev
   if (nrp.endsWith("-dev")) {
@@ -820,14 +518,8 @@ export function findDeveloperByNRP(nrp: string): Developer | null {
   } else if (nrp.endsWith("-nondev")) {
     actualNrp = nrp.replace("-nondev", "");
     // Untuk -nondev, cek apakah ada di nondev_lolos atau nondev_tidaklolos
-    const nondevLolosData = developersData.nondev_lolos as Record<
-      string,
-      { nrp: string; nama: string; namaDepan: string; posisi: string }
-    >;
-    const nondevTidakLolosData = developersData.nondev_tidaklolos as Record<
-      string,
-      { nrp: string; nama: string; namaDepan: string; posisi: string }
-    >;
+    const nondevLolosData = developersData.nondev_lolos;
+    const nondevTidakLolosData = developersData.nondev_tidaklolos;
 
     if (nondevLolosData[actualNrp]) {
       preferredCategory = "nondev_lolos";
@@ -840,23 +532,16 @@ export function findDeveloperByNRP(nrp: string): Developer | null {
 
   // Jika ada preferensi kategori, cek kategori tersebut dulu
   if (preferredCategory) {
-    const categoryData =
-      developersData[preferredCategory as keyof typeof developersData];
-    if (categoryData) {
-      const typedData = categoryData as Record<
-        string,
-        { nrp: string; nama: string; namaDepan: string; posisi: string }
-      >;
-      if (typedData[actualNrp]) {
-        return {
-          ...typedData[actualNrp],
-          divisi: preferredCategory as
-            | "developer"
-            | "community"
-            | "nondev_lolos"
-            | "nondev_tidaklolos",
-        };
-      }
+    const categoryData = developersData[preferredCategory];
+    if (categoryData && categoryData[actualNrp]) {
+      return {
+        ...categoryData[actualNrp],
+        divisi: preferredCategory as
+          | "developer"
+          | "community"
+          | "nondev_lolos"
+          | "nondev_tidaklolos",
+      };
     }
   }
 
@@ -866,7 +551,7 @@ export function findDeveloperByNRP(nrp: string): Developer | null {
   }
 
   // Cek di semua kategori dengan prioritas untuk NRP tanpa suffix
-  const categoryOrder = [
+  const categoryOrder: (keyof DevelopersDataStructure)[] = [
     "developer",
     "community",
     "nondev_lolos",
@@ -874,14 +559,10 @@ export function findDeveloperByNRP(nrp: string): Developer | null {
   ];
 
   for (const divisi of categoryOrder) {
-    const data = developersData[divisi as keyof typeof developersData];
-    const typedData = data as Record<
-      string,
-      { nrp: string; nama: string; namaDepan: string; posisi: string }
-    >;
-    if (typedData[actualNrp]) {
+    const data = developersData[divisi];
+    if (data && data[actualNrp]) {
       return {
-        ...typedData[actualNrp],
+        ...data[actualNrp],
         divisi: divisi as
           | "developer"
           | "community"
@@ -892,4 +573,30 @@ export function findDeveloperByNRP(nrp: string): Developer | null {
   }
 
   return null;
+}
+
+// Function untuk mendapatkan statistik
+export function getDeveloperStatistics() {
+  return {
+    developer: Object.keys(developersData.developer).length,
+    community: Object.keys(developersData.community).length,
+    nondev_lolos: Object.keys(developersData.nondev_lolos).length,
+    nondev_tidaklolos: Object.keys(developersData.nondev_tidaklolos).length,
+    total:
+      Object.keys(developersData.developer).length +
+      Object.keys(developersData.community).length +
+      Object.keys(developersData.nondev_lolos).length +
+      Object.keys(developersData.nondev_tidaklolos).length,
+  };
+}
+
+// Function untuk mendapatkan semua developer berdasarkan divisi
+export function getDevelopersByDivision(
+  divisi: "developer" | "community" | "nondev_lolos" | "nondev_tidaklolos",
+): Developer[] {
+  const data = developersData[divisi];
+  return Object.values(data).map((dev) => ({
+    ...dev,
+    divisi,
+  }));
 }

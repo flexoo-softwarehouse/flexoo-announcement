@@ -8,15 +8,14 @@ import {
   findDeveloperByNRP,
   getAnnouncementInfo,
 } from "@/lib/developers";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 // Daftar NRP yang memiliki overlap - semua yang ada di multiple kategori
 const overlapNRPs: string[] = [
   "5025241010", // Dzaky - ada di developer dan nondev_lolos
   // Tambahkan NRP lain yang overlap jika ada
 ];
-
-import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
 
 // Loading component
 function LoadingResult() {
@@ -73,12 +72,7 @@ function AnnouncementContent() {
             );
           }
         } else {
-          return (
-            <TidakLolosResult
-              developer={developer}
-              announcementInfo={announcementInfo}
-            />
-          );
+          return <TidakLolosResult developer={developer} />;
         }
       } else {
         // NRP tidak ditemukan
@@ -269,13 +263,7 @@ function NonDevLolosResult({
 }
 
 // Komponen untuk hasil yang tidak lolos (Developer maupun Non-Developer)
-function TidakLolosResult({
-  developer,
-  announcementInfo,
-}: {
-  developer: Developer;
-  announcementInfo: ReturnType<typeof getAnnouncementInfo>;
-}) {
+function TidakLolosResult({ developer }: { developer: Developer }) {
   return (
     <>
       <div className="mt-4 flex flex-col items-center justify-center">

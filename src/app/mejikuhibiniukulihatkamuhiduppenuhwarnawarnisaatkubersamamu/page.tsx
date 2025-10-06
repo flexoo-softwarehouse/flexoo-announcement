@@ -5,8 +5,8 @@ import Typography from "@/components/Typography";
 import Button from "@/components/buttons/Button";
 import Input from "@/components/form/Input";
 import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useState, useCallback } from "react";
 
 interface FormData {
   nrp: string;

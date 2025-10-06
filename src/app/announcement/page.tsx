@@ -99,6 +99,7 @@ export default function Announcement() {
                   helperTextClassName="text-white"
                   className="rounded-none focus:outline-yellow-500 focus:ring-yellow-500 focus:border-yellow-500"
                   validation={{ required: "NRP harus diisi" }}
+                  disabled
                 />
               </div>
               <Button

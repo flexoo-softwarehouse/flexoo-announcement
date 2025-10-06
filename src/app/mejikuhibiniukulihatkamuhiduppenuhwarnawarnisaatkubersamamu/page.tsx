@@ -37,10 +37,14 @@ export default function Announcement() {
 
       if (result.found) {
         // Redirect ke result dengan NRP sebagai parameter
-        router.push(`/announcement/result?nrp=${nrpValue}`);
+        router.push(
+          `/mejikuhibiniukulihatkamuhiduppenuhwarnawarnisaatkubersamamu/result?nrp=${nrpValue}`,
+        );
       } else {
         // Redirect ke result dengan status not found
-        router.push(`/announcement/result?result=notfound`);
+        router.push(
+          `/mejikuhibiniukulihatkamuhiduppenuhwarnawarnisaatkubersamamu/result?result=notfound`,
+        );
       }
     } catch (error) {
       console.error("Error validating NRP:", error);

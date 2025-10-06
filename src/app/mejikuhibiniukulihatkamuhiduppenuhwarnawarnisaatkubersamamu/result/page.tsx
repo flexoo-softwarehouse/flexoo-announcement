@@ -241,7 +241,7 @@ function NonDevLolosResult({
           variant="h4"
           className="font-montserrat max-lg:text-2xl font-bold text-blue-900 text-center leading-4"
         >
-          SELAMAT KAMU DITERIMA!
+          SELAMAT KAMU !
         </Typography>
         <Typography
           variant="h5"

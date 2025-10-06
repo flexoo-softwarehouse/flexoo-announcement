@@ -6,6 +6,7 @@ import Button from "@/components/buttons/Button";
 import Input from "@/components/form/Input";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
+import { useState, useCallback } from "react";
 
 interface FormData {
   nrp: string;
@@ -14,8 +15,66 @@ interface FormData {
 export default function Announcement() {
   const methods = useForm<FormData>();
   const router = useRouter();
+  const [clickCount, setClickCount] = useState(0);
+  const [buttonPosition, setButtonPosition] = useState({
+    top: "auto",
+    left: "auto",
+  });
+  const [isButtonMoving, setIsButtonMoving] = useState(false);
+  const [isButtonFloating, setIsButtonFloating] = useState(false);
+
+  const moveButtonRandomly = useCallback(() => {
+    // Dapatkan ukuran viewport
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const buttonWidth = 200; // Perkiraan lebar button
+    const buttonHeight = 50; // Perkiraan tinggi button
+
+    // Hitung posisi random dalam viewport
+    const maxLeft = viewportWidth - buttonWidth;
+    const maxTop = viewportHeight - buttonHeight;
+
+    const randomLeft = Math.random() * Math.max(0, maxLeft);
+    const randomTop = Math.random() * Math.max(0, maxTop);
+
+    setButtonPosition({
+      left: `${randomLeft}px`,
+      top: `${randomTop}px`,
+    });
+
+    setIsButtonFloating(true);
+  }, []);
+
+  const handleButtonClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (clickCount < 5) {
+        e.preventDefault();
+        setClickCount((prev) => prev + 1);
+        setIsButtonMoving(true);
+
+        // Pindahkan button ke posisi random
+        moveButtonRandomly();
+
+        // Reset moving state setelah animasi
+        setTimeout(() => {
+          setIsButtonMoving(false);
+        }, 300);
+
+        return;
+      }
+
+      // Jika sudah 5x, lanjutkan dengan submit normal
+      // Button akan submit form secara normal
+    },
+    [clickCount, moveButtonRandomly],
+  );
 
   const onSubmit = async (data: FormData) => {
+    // Hanya jalankan submit jika sudah diklik 5x
+    if (clickCount < 5) {
+      return;
+    }
+
     const nrpValue = data.nrp.trim();
 
     if (!nrpValue) {
@@ -53,7 +112,7 @@ export default function Announcement() {
   };
 
   return (
-    <main className="w-screen relative overflow-hidden max-lg:px-6 flex flex-col justify-center items-center h-screen bg-[url('/images/background-announcement.svg')] bg-cover bg-center bg-no-repeat">
+    <main className="w-screen overflow-hidden max-lg:px-6 flex flex-col justify-center items-center h-screen bg-[url('/images/background-announcement.svg')] bg-cover bg-center bg-no-repeat">
       <div className="flex flex-col justify-center items-center ">
         <NextImage
           src="/logo-flexoo.svg"
@@ -82,7 +141,7 @@ export default function Announcement() {
           Silahkan masukan NRP kamu dan buka hasil seleksi Oprec Flexoo 2025
         </Typography>
       </div>
-      <div className="px-6 py-4 bg-blue-900 max-lg:w-full rounded-lg w-1/2 flex flex-col flex-start gap-2 max-lg:mt-6  mt-8">
+      <div className="px-6 py-4 bg-blue-900 max-lg:w-full rounded-lg w-1/2 flex flex-col flex-start gap-2 max-lg:mt-6 mt-8">
         <Typography
           variant="p"
           className="font-montserrat font-semibold text-white leading-4 "
@@ -103,21 +162,51 @@ export default function Announcement() {
                   helperTextClassName="text-white"
                   className="rounded-none focus:outline-yellow-500 focus:ring-yellow-500 focus:border-yellow-500"
                   validation={{ required: "NRP harus diisi" }}
-                  disabled
                 />
               </div>
-              <Button
-                type="submit"
-                className="h-fit w-fit text-nowrap max-lg:w-full max-lg:mt-2 bg-yellow-400 rounded-none text-black font-bold font-monserrat hover:bg-yellow-500 px-10"
-                variant="yellow"
-                color="white"
-              >
-                Lihat Hasil
-              </Button>
+
+              {/* Button placeholder untuk layout normal */}
+              {!isButtonFloating && (
+                <Button
+                  type={clickCount >= 5 ? "submit" : "button"}
+                  onClick={handleButtonClick}
+                  className="h-fit w-fit text-nowrap max-lg:w-full max-lg:mt-2 bg-yellow-400 rounded-none text-black font-bold font-monserrat hover:bg-yellow-500 px-10"
+                  variant="yellow"
+                  color="white"
+                >
+                  Lihat Hasil
+                </Button>
+              )}
+
+              {/* Button yang bisa bergerak ke mana saja */}
+              {isButtonFloating && (
+                <Button
+                  type={clickCount >= 5 ? "submit" : "button"}
+                  onClick={handleButtonClick}
+                  className={`
+                    h-fit w-fit text-nowrap px-10 rounded-none text-black font-bold font-monserrat
+                    transition-all duration-300 ease-in-out fixed z-50 bg-yellow-400 hover:bg-yellow-500 cursor-pointer
+                    ${
+                      isButtonMoving
+                        ? "transform scale-95"
+                        : "transform scale-100"
+                    }
+                  `}
+                  style={{
+                    top: buttonPosition.top,
+                    left: buttonPosition.left,
+                  }}
+                  variant="yellow"
+                  color="white"
+                >
+                  Lihat Hasil
+                </Button>
+              )}
             </form>
           </FormProvider>
         </div>
       </div>
+
       <NextImage
         src="/logo-flexoo.svg"
         alt="Flexoo Logo"

@@ -378,14 +378,6 @@ function NRPTidakDitemukanResult() {
         >
           Mohon periksa kembali NRP yang Anda masukkan
         </Typography>
-
-        <ButtonLink
-          href="/"
-          variant="yellow"
-          className="rounded-none max-lg:w-full mt-6 w-1/2 text-black font-bold bg-yellow-400 hover:bg-yellow-500"
-        >
-          Coba Lagi
-        </ButtonLink>
       </div>
     </>
   );

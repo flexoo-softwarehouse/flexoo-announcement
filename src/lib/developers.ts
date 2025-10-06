@@ -264,6 +264,12 @@ const developersData: DevelopersDataStructure = {
       namaDepan: "Brahmana",
       posisi: "Developer (Tidak Lolos)",
     },
+    "5025241010": {
+      nrp: "5025241010",
+      nama: "Muhammad Dzaky Radithya Ryrdi",
+      namaDepan: "Dzaky",
+      posisi: "Developer (Tidak Lolos)",
+    },
     "5054241002": {
       nrp: "5054241002",
       nama: "Tuti Purwaningsih",

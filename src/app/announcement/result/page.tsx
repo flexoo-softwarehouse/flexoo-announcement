@@ -9,8 +9,11 @@ import {
   getAnnouncementInfo,
 } from "@/lib/developers";
 
-// Daftar NRP yang memiliki overlap - kosong karena tidak ada overlap lagi
-const overlapNRPs: string[] = [];
+// Daftar NRP yang memiliki overlap - semua yang ada di multiple kategori
+const overlapNRPs: string[] = [
+  "5025241010", // Dzaky - ada di developer dan nondev_lolos
+  // Tambahkan NRP lain yang overlap jika ada
+];
 
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
@@ -37,7 +40,7 @@ function AnnouncementContent() {
 
   const renderResult = () => {
     if (nrp) {
-      // Cek apakah ini NRP overlap tanpa suffix (saat ini tidak ada)
+      // Cek apakah ini NRP overlap tanpa suffix
       if (overlapNRPs.includes(nrp) && !nrp.includes("-")) {
         return <OverlapNRPResult nrp={nrp} />;
       }
@@ -292,16 +295,29 @@ function TidakLolosResult({
           variant="h6"
           className="font-montserrat mt-2 w-3/4 max-lg:w-full font-semibold text-blue-900 text-center leading-5"
         >
-          Bukan berarti kamu gagal bukan berarti kamu tidak cukup baik. Terus
+          Bukan berarti kamu gagal, bukan berarti kamu tidak cukup baik. Terus
           asah kemampuanmu, terus berproses, dan jangan menyerah!
         </Typography>
       </div>
+
+      <ButtonLink
+        href="/"
+        variant="yellow"
+        className="rounded-none max-lg:w-full mt-8 w-1/2 max-lg:mt-6 text-black font-bold bg-yellow-400 hover:bg-yellow-500"
+      >
+        Kembali ke Home
+      </ButtonLink>
     </>
   );
 }
 
-// Komponen untuk NRP yang overlap - perlu suffix (saat ini tidak ada)
+// Komponen untuk NRP yang overlap - perlu suffix
 function OverlapNRPResult({ nrp }: { nrp: string }) {
+  // Dapatkan nama untuk greeting personal
+  const tempDev =
+    findDeveloperByNRP(`${nrp}-dev`) || findDeveloperByNRP(`${nrp}-nondev`);
+  const namaDepan = tempDev?.namaDepan || "Kamu";
+
   return (
     <>
       <div className="mt-4 flex flex-col items-center justify-center max-lg:px-4">
@@ -309,22 +325,37 @@ function OverlapNRPResult({ nrp }: { nrp: string }) {
           variant="h4"
           className="font-montserrat font-extrabold max-lg:text-2xl text-blue-900 text-center leading-6"
         >
-          NRP MEMILIKI MULTIPLE HASIL
+          HAI {namaDepan.toUpperCase()}! 👋
         </Typography>
         <Typography
           variant="h6"
           className="font-montserrat mt-4 font-semibold text-blue-900 text-center leading-5"
         >
-          Silahkan tambahkan suffix untuk melihat hasil:
+          Kamu memiliki hasil di 2 kategori! Silahkan pilih:
         </Typography>
-        <div className="mt-4 space-y-2 text-center">
-          <Typography variant="p" className="font-montserrat text-blue-900">
-            • Untuk hasil Developer: <strong>{nrp}-dev</strong>
-          </Typography>
-          <Typography variant="p" className="font-montserrat text-blue-900">
-            • Untuk hasil Non-Developer: <strong>{nrp}-nondev</strong>
-          </Typography>
+        <div className="mt-6 w-full space-y-4 flex flex-col items-center">
+          <ButtonLink
+            href={`/announcement/result?nrp=${nrp}-dev`}
+            variant="yellow"
+            className="rounded-none w-full max-lg:w-full text-black font-bold bg-yellow-400 hover:bg-yellow-500"
+          >
+            Lihat Hasil Developer
+          </ButtonLink>
+          <ButtonLink
+            href={`/announcement/result?nrp=${nrp}-nondev`}
+            variant="yellow"
+            className="rounded-none w-full max-lg:w-full text-black font-bold bg-transparent border-2 border-black hover:bg-yellow-400 hover:text-black hover:border-yellow-400"
+          >
+            Lihat Hasil Non-Developer
+          </ButtonLink>
         </div>
+        <Typography
+          variant="p"
+          className="font-montserrat mt-4 text-sm text-blue-800 text-center"
+        >
+          Atau ketik manual: <strong>{nrp}-dev</strong> atau{" "}
+          <strong>{nrp}-nondev</strong>
+        </Typography>
       </div>
     </>
   );
